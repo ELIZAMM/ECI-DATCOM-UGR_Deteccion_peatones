@@ -138,7 +138,6 @@ Los kernel linear y poly se compartan de forma muy similar al cambiar los parám
 
 Es muy interesante que la combinación de parámetros que mejor funciona para el HoG utilizando SVM sea el kernel rbf con una combinación particular de parámetros C y gamma. Si tuviera que elegir cual seria el modelo que aplicaría a futuro para la detección de peatones seria uno utilizando el kernel poly, ya que demostro ser mucho mas estable que el kernel rbf a diferentes valores de C y gamma.
 
-\newpage
 # Local Binnary Patterns (LBP)
 
 El primer paso para construir el descriptor LBP es convertir la imagen a escala de gris. Para cada pixel de la imagen, se selecciona un vecindario de tamaño r que rodea el centro del pixel. El valor LBP se calcula para cada centro y se guarda en un array 2D del mismo tamaño que la imagen de entrada.
@@ -268,7 +267,7 @@ Luego probe el modelo sobre el dataset de test (500 imágenes de peatones y 600 
 
 En la **Figura \ref{img:img4}** podemos ver la matriz de confusion para estos resultados.
 
-![Matriz de confusión predicción sobre el dataset de test para el descriptor LBP utilizando el algoritmo SVM con kernel lineal y parámetros por defecto](LBP_Confusion.png)
+![Matriz de confusión predicción sobre el dataset de test para el descriptor LBP utilizando el algoritmo SVM con kernel lineal y parámetros por defecto](img/LBP_Confusion.png)
 
 El código utilizado se encuentra en la **sección 2. Prueba sobre el dataset de test** del documento _LBP.ipynb_ ( _LBP.html_ ).
 
@@ -332,7 +331,7 @@ El único parámetro que produce cambios en la exactitud promedio es el kernel, 
 
 Al comparar los resultados de LBP+SVM vs HoG+SVM podemos observar que LBP se comporta mejor que HoG al menos sobre este set de datos. La diferencia no es demasiada. Una buena opción es unir ambos descriptores para probar si de esta forma la clasificación mejora, ya que cada descriptor puede capturar diferentes aspectos de los datos y al ser combinados el poder de discriminación aumenta.
 
-\newpage
+
 # Mejoras voluntarias
 
 ## LBP uniforme
@@ -455,7 +454,7 @@ La **Figura \ref{img:imgcomb}** muestra las métricas para la detección utiliza
 
 ![Estadísticas predicción sobre el dataset de test para la combinación de descriptores HoG y LBP utilizando el algoritmo SVM con kernel lineal y parámetros por defecto](img/tabla4_comb.png)
 
-![Matriz de confusión predicción sobre el dataset de test para la combinación de descritores HoG y LBP utilizando el algoritmo SVM con kernel lineal](HOG_LBP_Confusion.png)
+![Matriz de confusión predicción sobre el dataset de test para la combinación de descritores HoG y LBP utilizando el algoritmo SVM con kernel lineal](img/HOG_LBP_Confusion.png)
 
 
 ### Implementación de K-Fold Cross Validation
