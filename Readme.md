@@ -62,17 +62,13 @@ La tarea consistió en desarrollar la función _loadTestingData_ que se encarga 
 
 Luego se aplica el modelo sobre este conjunto de imágenes. Para evaluar los resultados primero utilice la función **classification_report** del paquete scikit-learn que calcula métricas sobre la ejecución del algoritmo comparando las etiquetas conocidas para los datos de test con las predicciones realizadas por la SVM. Los resultados obtenidos se muestran en la **Figura \ref{img:img1}**.
 
-```{r figs, echo = FALSE, fig.width=4, fig.height=3, fig.cap="\\label{img:img1}Estadísticas predicción sobre el dataset de test para el descriptor HoG utilizando el algoritmo SVM con kernel lineal y parámetros por defecto."}
-knitr::include_graphics("img/tabla1_HOG.png")
-```
+![Estadísticas predicción sobre el dataset de test para el descriptor HoG utilizando el algoritmo SVM con kernel lineal y parámetros por defecto](img/tabla1_HOG.png)
 
 Se puede observar que teniendo en cuenta la métrica F1 obtenemos un valor promedio de 0.97 el cual es muy alto.
 
 Para tener mas claridad programe la función **plot_confusion_matrix** que grafica una matriz de confusión, para que podamos observar de forma detallada donde se equivoca el algoritmo. Ver **Figura \ref{img:img2}**.
 
-```{r figs2, echo = FALSE, fig.width=5, fig.height=4, fig.cap="\\label{img:img2}Matriz de confusión predicción sobre el dataset de test para el descriptor HoG utilizando el algoritmo SVM con kernel lineal y parámetros por defecto."}
-knitr::include_graphics("img/HOG_Confusion.png")
-```
+![Matriz de confusión predicción sobre el dataset de test para el descriptor HoG utilizando el algoritmo SVM con kernel lineal y parámetros por defecto](img/HOG_Confusion.png)
 
 ### Conclusiones parciales
 Podemos observar que 24 peatones fueron clasificados de forma errónea como fondo, y 12 imágenes de fondo fueron clasificadas de forma errónea como peatones. Esto indica que estamos cometiendo más errores para clasificar correctamente nuestra clase positiva (peatones). A pesar de esto nuestro algoritmo con un puntaje F1 de 0.97 indica que el modelo distingue muy bien los peatones del fondo.
@@ -111,7 +107,7 @@ Y la exactitud obtenida fue de 0.9757
 
 Los resultados completos se pueden ver en la **Tabla \ref{tab:tab1}**.
 
-```{r, echo = FALSE}
+```r
 df.res.previos <- data.frame("param_C" = "default", "param_gamma" = "default", 
                              "param_kernel" = "lineal", "mean_test_score" = 0.9628, 
                              "std_test_score" = 0.0164, "K_crossvalidation" = 10)
@@ -147,9 +143,7 @@ Es muy interesante que la combinación de parámetros que mejor funciona para el
 
 El primer paso para construir el descriptor LBP es convertir la imagen a escala de gris. Para cada pixel de la imagen, se selecciona un vecindario de tamaño r que rodea el centro del pixel. El valor LBP se calcula para cada centro y se guarda en un array 2D del mismo tamaño que la imagen de entrada.
 
-```{r figslbp, echo = FALSE, fig.width=5, fig.height=4, fig.cap="\\label{img:lbpbasico}Imagen calculo de los coeficientes para el LBP."}
-knitr::include_graphics("img/lbp_thresholding.png")
-```
+![Imagen calculo de los coeficientes para el LBP](img/lbp_thresholding.png)
 
 Cuando el valor del píxel 'vecino' sea igual o mayor al valor del píxel central, se asigna un valor 1 al bit de posición y en caso contrario se asigna un valor 0 hasta completar la comparación con los 8 píxeles adyacentes y formar un numero binario, en el caso del ejemplo de la **Figura \ref{img:lbpbasico}** seria: ´11110101´ dicho valor binario se transforma a su equivalente decimal ´245´ el cual corresponde al nuevo valor de intensidad de la imagen LBP.
 
@@ -159,7 +153,7 @@ El objetivo de este ejercicio consiste en implementar la versión básica de LBP
 
 A continuación se muestra el código generado para calcular el LBP básico de una imagen de acuerdo a los criterios mencionados en el parrafo anterior.
 
-```{python eval = FALSE}
+```python
 def get_pixel_value(imagen, x_pos, y_pos):
     """
     Función para obtener el valor numérico de un determinado pixel.
@@ -270,15 +264,11 @@ Una vez que implemente la funcion para el calculo del LBP, modifique la funcion 
 
 Luego probe el modelo sobre el dataset de test (500 imágenes de peatones y 600 de fondo). Los resultados obtenidos se pueden ver en la **Figura \ref{img:img3}**.
 
-```{r figs3, echo=FALSE, fig.width=4, fig.height=3, fig.cap="\\label{img:img3}Estadísticas predicción sobre el dataset de test para el descriptor LBP básico utilizando el algoritmo SVM con kernel lineal y parámetros por defecto."}
-knitr::include_graphics("img/tabla2_LBP.png")
-```
+![Estadísticas predicción sobre el dataset de test para el descriptor LBP básico utilizando el algoritmo SVM con kernel lineal y parámetros por defecto](img/tabla2_LBP.png)
 
 En la **Figura \ref{img:img4}** podemos ver la matriz de confusion para estos resultados.
 
-```{r figs4, echo=FALSE, fig.width=5, fig.height=4, fig.cap="\\label{img:img4}Matriz de confusión predicción sobre el dataset de test para el descriptor LBP utilizando el algoritmo SVM con kernel lineal y parámetros por defecto."}
-knitr::include_graphics("img/LBP_Confusion.png")
-```
+![Matriz de confusión predicción sobre el dataset de test para el descriptor LBP utilizando el algoritmo SVM con kernel lineal y parámetros por defecto](LBP_Confusion.png)
 
 El código utilizado se encuentra en la **sección 2. Prueba sobre el dataset de test** del documento _LBP.ipynb_ ( _LBP.html_ ).
 
@@ -351,7 +341,7 @@ Una variante ampliamente usada de los LBP son los conocidos como patrones unifor
 
 Para implementarlo precalcule todas las posibles combinaciones y les preasigne los valores. Es decir tome todos los valores hasta 255, le calcule el binario y conte las transiciones, de forma ordenada le preasigno un entero hasta el valor 57 a los patrones uniformes y el valor 58 a los no uniformes (considerando índice 0).
 
-```{python eval=FALSE}
+```python
 
 def precalcule_LBPu(label_binario):
     """
@@ -391,13 +381,12 @@ El código empleado se encuentra en el fichero **LBP_uniforme.ipynb** (**LBP_uni
 
 En la **Figura \ref{img:imglbpu}** se encuentran las métricas de los resultados y en la **Figura \ref{img:lbpu_cm}** podemos ver la matriz de confusion para estos resultados.
 
-```{r figstablbpu, echo=FALSE, fig.width=4, fig.height=3, fig.cap="\\label{img:imglbpu}Estadísticas predicción sobre el dataset de test para el descriptor LBP uniforme utilizando el algoritmo SVM con kernel lineal y parámetros por defecto."}
-knitr::include_graphics("img/tabla3_LBPu.png")
-```
 
-```{r figslbpucm, echo=FALSE, fig.width=5, fig.height=4, fig.cap="\\label{img:lbpu_cm}Matriz de confusión predicción sobre el dataset de test para el descriptor LBP uniforme utilizando el algoritmo SVM con kernel lineal y parámetros por defecto."}
-knitr::include_graphics("img/LBPu_Confusion.png")
-```
+![Estadísticas predicción sobre el dataset de test para el descriptor LBP uniforme utilizando el algoritmo SVM con kernel lineal y parámetros por defecto](img/tabla3_LBPu.png)
+
+
+![Matriz de confusión predicción sobre el dataset de test para el descriptor LBP uniforme utilizando el algoritmo SVM con kernel lineal y parámetros por defecto](img/LBPu_Confusion.png)
+
 
 #### Conclusiones parciales
 
@@ -463,13 +452,11 @@ El código desarrollado se encuentra en el fichero **Combinacion_HOG_LBP.ipynb**
 
 La **Figura \ref{img:imgcomb}** muestra las métricas para la detección utilizando la combinación de HoG y LBP y la **Figura \ref{img:lbphog_cm}** muestra la matriz de confusión para la ejecución de la combinación HoG+LBP utilizando una SVM con kernel lineal. Al combinar LBP con HoG obtenemos una mejora en la detección de acuerdo a la matriz de confusion ahora solo nos equivocamos en 6 peatones en el dataset de test y en una imagen de fondo.
 
-```{r figstabcomb, echo=FALSE, fig.width=4, fig.height=3, fig.cap="\\label{img:imgcomb}Estadísticas predicción sobre el dataset de test para la combinación de descriptores HoG y LBP utilizando el algoritmo SVM con kernel lineal y parámetros por defecto."}
-knitr::include_graphics("img/tabla4_comb.png")
-```
 
-```{r figshoglbp, echo=FALSE, fig.width=5, fig.height=4, fig.cap="\\label{img:lbphog_cm}Matriz de confusión predicción sobre el dataset de test para la combinación de descritores HoG y LBP utilizando el algoritmo SVM con kernel lineal."}
-knitr::include_graphics("img/HOG_LBP_Confusion.png")
-```
+![Estadísticas predicción sobre el dataset de test para la combinación de descriptores HoG y LBP utilizando el algoritmo SVM con kernel lineal y parámetros por defecto](img/tabla4_comb.png)
+
+![Matriz de confusión predicción sobre el dataset de test para la combinación de descritores HoG y LBP utilizando el algoritmo SVM con kernel lineal](HOG_LBP_Confusion.png)
+
 
 ### Implementación de K-Fold Cross Validation
 Luego probe realizar 10 Fold Cross Validation utilizando la combinación de descriptores, los resultados obtenidos fueron los siguientes:
@@ -488,7 +475,7 @@ Hasta ahora se estuvo trabajando con imágenes de tamaño 128x64. Los datos de e
 Para desarrollar esto, utilize el descriptor HoG entrenado con los datos que nos entrego el profesor. Más concretamente, utilize todas las imágenes de ambas carpetas (train y test) para entrenar el modelo. El kernel utilizado fue rbf con parámetros C:10 y gamma:0.01, elegí estos parámetros porque fueron los que mejores resultados dieron en el proceso de optimización de hiperparámetros. 
 **Algo muy importante es que agregue la opción probability=True**, esto es porque con esta opción puedo realizar predicciones en donde obtengo la probabilidad para cada clase, y esto luego lo usare para filtrar las detecciones de peatones para disminuir el número de falsos positivos.
 
-```{python eval=FALSE}
+```python
 
 # Creo una SVM con kernel rbf
 clf = SVC(kernel="rbf", C = 10, gamma = 0.01, probability = True)
@@ -506,7 +493,7 @@ Dada una imagen de tamaño mxn lo que hago es tomar una porción de dicha imagen
 
 Para solucionar los problemas de escala de la detección de las personas, creo pirámides de la imagen (pirámide multiescala) muestreando la imagen original a tamaños menore. De forma recursiva cada imagen se reduce a un 83% de la anterior. Esto se realiza con la siguiente función.
 
-```{python eval=FALSE}
+```python
 
 def get_pyramid(img):
 
@@ -531,14 +518,9 @@ En el documento **deteccion_peatones_escalas.ipynb** (**deteccion_peatones_escal
 ### Resultados
 A continuación se muestran las detecciones para una imagen de ejemplo, sin utilizar NMS y utilizando NMS. Recordemos además que solo se guardan detecciones para peatones en las cuales la SVM tiene una probabilidad para la clase mayor a 0.9
 
-```{r figshogpea, echo=FALSE, fig.width=5, fig.height=4, fig.cap="\\label{img:hog_peaton_nms}Detección de peatones a diferentes escalas con el descriptor HoG y una SVM."}
-knitr::include_graphics("img/HOG_peaton.png")
-```
+![Detección de peatones a diferentes escalas con el descriptor HoG y una SVM](img/HOG_peaton.png)
 
-```{r figshognms, echo=FALSE, fig.width=5, fig.height=4, fig.cap="\\label{img:hog_peaton_nms}Detección de peatones a diferentes escalas con el descriptor HoG y una SVM filtrando las detecciones con non max suppression."}
-knitr::include_graphics("img/HOG_NMS_peaton.png")
-```
-
+![Detección de peatones a diferentes escalas con el descriptor HoG y una SVM filtrando las detecciones con non max suppression](img/HOG_NMS_peaton.png)
 
 # Comparación gráfica de HoG+SVM, LBP+SVM, LBPu+SVM, HoG-LBP+SVM
 Comparo los resultados por los diferentes descriptores implementados más la combinación HoG-LBP con la SVM con kernel lineal y parámetros por defecto obtenidos con 10 fold cross validation.
